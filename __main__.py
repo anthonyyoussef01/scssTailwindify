@@ -1,4 +1,13 @@
 import sass
+import sys
+
+def check_dependencies():
+    try:
+        import sass
+    except ImportError:
+        print("Required dependency 'libsass' is not installed.")
+        print("Please install it by running: pip install libsass")
+        sys.exit(1)
 
 def compile_scss_to_css(input_file, output_file):
     try:
@@ -11,6 +20,7 @@ def compile_scss_to_css(input_file, output_file):
         print(f"Error compiling SCSS: {e}")
 
 if __name__ == "__main__":
+    check_dependencies()
     scss_file = input("Please enter the location of the SCSS file: ")
     css_file = "styles.css"
     compile_scss_to_css(scss_file, css_file)
